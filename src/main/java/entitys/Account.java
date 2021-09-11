@@ -18,6 +18,18 @@ public class Account {
         this.balance = this.credit - this.debit;
     }
 
+    private void depositCredit(long credit) {
+        this.credit += credit;
+    }
+
+    private void calculateBalance() {
+        this.balance = this.credit-this.debit;
+    }
+
+    private void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     private long getCredit() {
         return credit;
     }
@@ -33,6 +45,17 @@ public class Account {
     private LocalDate getDate() {
         return date;
     }
+
+    public void deposit(long amount, String date){
+        Account account = new Account();
+        account.depositCredit(amount);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date,df);
+        account.setDate(localDate);
+        account.calculateBalance();
+        db.add(account);
+    }
+
 
 
     public void printStatements(){
