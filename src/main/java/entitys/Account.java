@@ -22,6 +22,10 @@ public class Account {
         this.credit += credit;
     }
 
+    private void withdrawalDebit(long debit) {
+        this.debit += debit;
+    }
+
     private void calculateBalance() {
         this.balance = this.credit-this.debit;
     }
@@ -56,7 +60,15 @@ public class Account {
         db.add(account);
     }
 
-
+    public void withdrawal(long amount, String date){
+        Account account = new Account();
+        account.withdrawalDebit(amount);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date,df);
+        account.setDate(localDate);
+        account.calculateBalance();
+        db.add(account);
+    }
 
     public void printStatements(){
         System.out.println("    Date    Credit    Debit    Balance");
