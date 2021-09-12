@@ -10,7 +10,7 @@ public class Account {
     private long balance;
     private LocalDate date;
 
-    ArrayList<Account> db = new ArrayList<>();
+    ArrayList<Account> dataBase = new ArrayList<>();
 
     public void Account(){
         this.credit = 0;
@@ -26,10 +26,10 @@ public class Account {
         this.debit += debit;
     }
 
-    private void calculateBalance(ArrayList<Account> db) {
-        int size = db.size();
+    private void calculateBalance(ArrayList<Account> dataBase) {
+        int size = dataBase.size();
         if (size > 0) {
-            Account lastData = db.get(size - 1);
+            Account lastData = dataBase.get(size - 1);
             balance += lastData.getBalance();
         }
         balance += this.credit;
@@ -59,26 +59,26 @@ public class Account {
     public void deposit(long amount, String date){
         Account account = new Account();
         account.depositCredit(amount);
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date,df);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date,dateFormat);
         account.setDate(localDate);
-        account.calculateBalance(db);
-        db.add(account);
+        account.calculateBalance(dataBase);
+        dataBase.add(account);
     }
 
     public void withdrawal(long amount, String date){
         Account account = new Account();
         account.withdrawalDebit(amount);
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date,df);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date,dateFormat);
         account.setDate(localDate);
-        account.calculateBalance(db);
-        db.add(account);
+        account.calculateBalance(dataBase);
+        dataBase.add(account);
     }
 
     public void printStatements(){
         System.out.println("     Date    Credit    Debit    Balance");
-        for (Account account : db) {
+        for (Account account : dataBase) {
             System.out.println(account.getDate() + "    " +
                     account.getCredit() + "       " +
                     account.getDebit() + "      " +
