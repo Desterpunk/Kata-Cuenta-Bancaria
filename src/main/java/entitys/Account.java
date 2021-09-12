@@ -79,8 +79,10 @@ public class Account {
     public void printStatements(){
         System.out.println("     Date    Credit    Debit    Balance");
         for (Account account : db) {
-            System.out.println(account.getDate() + "    " + account.getCredit() + "       " +
-                    account.getDebit() + "      " + account.getBalance());
+            System.out.println(account.getDate() + "    " +
+                    account.getCredit() + "       " +
+                    account.getDebit() + "      " +
+                    account.getBalance());
         }
     }
 
