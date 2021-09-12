@@ -15,7 +15,7 @@ public class Account {
     public void Account(){
         this.credit = 0;
         this.debit = 0;
-        this.balance = this.credit - this.debit;
+        this.balance = 0;
     }
 
     private void depositCredit(long credit) {
